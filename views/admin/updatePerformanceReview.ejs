@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Performance Review</title>
+</head>
+<body>
+  <h1>Update Performance Review</h1>
+  <form action="/admin/update-performance-review/<%= performanceReview._id %>" method="POST">
+    <label for="employeeId">Employee:</label>
+    <select id="employeeId" name="employeeId" required>
+      <% employees.forEach(employee => { %>
+      <option value="<%= employee._id %>" <%= performanceReview.employee.equals(employee._id) ? 'selected' : '' %>><%= employee.name %></option>
+      <% }) %>
+    </select><br>
+    <label for="reviewers">Reviewers:</label>
+    <select id="reviewers" name="reviewers" multiple required>
+      <% employees.forEach(employee => { %>
+      <option value="<%= employee._id %>" <%= performanceReview.reviewers.includes(employee._id) ? 'selected' : '' %>><%= employee.name %></option>
+      <% }) %>
+    </select><br>
+    <button type="submit">Update Review</button>
+  </form>
+</body>
+</html>

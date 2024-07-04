@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <nav>
+    <ul>
+      <li><a href="/admin/add-employee">Add Employee</a></li>
+      <li><a href="/admin/view-employees">View Employees</a></li>
+      <li><a href="/admin/add-performance-review">Add Performance Review</a></li>
+      <li><a href="/admin/view-performance-reviews">View Performance Reviews</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h2>Manage Employees</h2>
+    <form action="/admin/add-employee" method="POST">
+      <h3>Add Employee</h3>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+      <button type="submit">Add Employee</button>
+    </form>
+
+    <h3>Employee List</h3>
+    <% if (employees.length > 0) { %>
+      <ul>
+        <% employees.forEach(employee => { %>
+          <li>
+            <%= employee.name %> - <%= employee.email %> 
+            <a href="/admin/update-employee/<%= employee._id %>">Update</a>
+            <a href="/admin/remove-employee/<%= employee._id %>">Remove</a>
+            <% if (!employee.isAdmin) { %>
+              <a href="/admin/make-admin/<%= employee._id %>">Make Admin</a>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No employees found.</p>
+    <% } %>
+  </section>
+
+  <section>
+    <h2>Manage Performance Reviews</h2>
+    <form action="/admin/add-performance-review" method="POST">
+      <h3>Add Performance Review</h3>
+      <label for="employeeId">Employee:</label>
+      <select id="employeeId" name="employeeId" required>
+        <% employees.forEach(employee => { %>
+          <option value="<%= employee._id %>"><%= employee.name %></option>
+        <% }) %>
+      </select><br>
+      <label for="reviewers">Reviewers:</label>
+      <select id="reviewers" name="reviewers" multiple required>
+        <% employees.forEach(employee => { %>
+          <option value="<%= employee._id %>"><%= employee.name %></option>
+        <% }) %>
+      </select><br>
+      <button type="submit">Add Review</button>
+    </form>
+
+    <h3>Performance Reviews List</h3>
+    <% if (performanceReviews.length > 0) { %>
+      <ul>
+        <% performanceReviews.forEach(review => { %>
+          <li>
+            Employee: <%= review.employee.name %> 
+            Reviewers: <%= review.reviewers.map(reviewer => reviewer.name).join(', ') %>
+            <a href="/admin/update-performance-review/<%= review._id %>">Update</a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No performance reviews found.</p>
+    <% } %>
+  </section>
+</body>
+</html>

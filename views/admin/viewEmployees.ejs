@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Employees</title>
+</head>
+<body>
+  <h1>Employees</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Is Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% employees.forEach(employee => { %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.isAdmin ? 'Yes' : 'No' %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

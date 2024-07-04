@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Performance Reviews</title>
+</head>
+<body>
+  <h1>Performance Reviews</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Reviewers</th>
+        <th>Feedbacks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% performanceReviews.forEach(review => { %>
+      <tr>
+        <td><%= review.employee.name %></td>
+        <td>
+          <ul>
+            <% review.reviewers.forEach(reviewer => { %>
+            <li><%= reviewer.name %></li>
+            <% }) %>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <% review.feedbacks.forEach(feedback => { %>
+            <li><%= feedback.reviewer.name %>: <%= feedback.feedback %></li>
+            <% }) %>
+          </ul>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
