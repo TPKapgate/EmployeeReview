@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Dashboard</title>
+</head>
+<body>
+  <h1>Employee Dashboard</h1>
+  <section>
+    <h2>Performance Reviews Requiring Feedback</h2>
+    <% if (reviewsToFeedback.length > 0) { %>
+      <ul>
+        <% reviewsToFeedback.forEach(review => { %>
+          <li>
+            <p>Review for: <%= review.employee.name %></p>
+            <form action="/employee/submit-feedback" method="POST">
+              <input type="hidden" name="reviewId" value="<%= review._id %>">
+              <label for="feedback">Feedback:</label>
+              <textarea id="feedback" name="feedback" required></textarea><br>
+              <button type="submit">Submit Feedback</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No performance reviews require your feedback at this moment.</p>
+    <% } %>
+  </section>
+</body>
+</html>

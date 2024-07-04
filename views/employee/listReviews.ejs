@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Performance Reviews</title>
+</head>
+<body>
+  <h1>Performance Reviews Requiring Feedback</h1>
+  <ul>
+    <% performanceReviews.forEach(review => { %>
+    <li>
+      Review for: <%= review.employee.name %>
+      <form action="/employee/submit-feedback" method="POST">
+        <input type="hidden" name="reviewId" value="<%= review._id %>">
+        <textarea name="feedback" required></textarea>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

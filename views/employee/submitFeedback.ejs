@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Feedback</title>
+</head>
+<body>
+  <h1>Submit Feedback</h1>
+  <form action="/employee/submit-feedback" method="POST">
+    <input type="hidden" name="reviewId" value="<%= review._id %>">
+    <label for="feedback">Feedback:</label>
+    <textarea id="feedback" name="feedback" required></textarea><br>
+    <button type="submit">Submit Feedback</button>
+  </form>
+</body>
+</html>
